@@ -41,7 +41,7 @@ public class MyOrientationListener implements SensorEventListener {
         if (event.sensor.getType() == Sensor.TYPE_ORIENTATION) {
             float x = event.values[SensorManager.DATA_X];
 
-            if (Math.abs(lastX) > 1.0) {
+            if (Math.abs(lastX) > 0.1) {
                 listener.onOrientationChanged(x);
             }
             lastX = x;

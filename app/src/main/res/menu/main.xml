@@ -7,15 +7,12 @@
         android:title="普通地图"
         app:showAsAction="never" />
     <item
-        android:id="@+id/traficMode"
+        android:id="@+id/followMode"
         android:title="跟随模式"
         app:showAsAction="never" />
     <item
-        android:id="@+id/starMode"
+        android:id="@+id/compassMode"
         android:title="罗盘模式"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/action_settings"
-        android:title="跟随模式"
-        app:showAsAction="never" />
+
 </menu>

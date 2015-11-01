@@ -53,21 +53,25 @@ public class MyLocationListener implements BDLocationListener {
                 .accuracy(bdLocation.getRadius())
                 .direction(100)
                 .latitude(bdLocation.getLatitude())
-                .longitude(bdLocation.getLongitude())
-                .build();
+                .longitude(bdLocation.getLongitude()).build();
+
 
         latLng = new LatLng(bdLocation.getLatitude(), bdLocation.getLongitude());
 
-        MyLocationConfiguration configuration=new MyLocationConfiguration(MyLocationConfiguration.LocationMode.NORMAL,true,null);
+
         mapView.getMap().setMyLocationData(data);
-        mapView.getMap().setMyLocationConfigeration(configuration);
+
 
         currentRadius=bdLocation.getRadius();
         currentAddr = bdLocation.getAddrStr();
         if (isFirst) {
+            MyLocationConfiguration configuration
+                    =new MyLocationConfiguration(MyLocationConfiguration.LocationMode.NORMAL,true,null);
+            mapView.getMap().setMyLocationConfigeration(configuration);
             isFirst = false;
             latLng = new LatLng(bdLocation.getLatitude(), bdLocation.getLongitude());
             MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(latLng);
+
             mapView.getMap().animateMapStatus(msu);
             Toast.makeText(context, "成功" + currentAddr, Toast.LENGTH_SHORT).show();
         }
