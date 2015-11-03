@@ -34,6 +34,7 @@ import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.mapinfo.newmap.Imle.MyLocationListener;
 import com.mapinfo.newmap.Imle.MyOrientationListener;
+import com.mapinfo.newmap.View.DetailActivity;
 import com.mapinfo.newmap.View.RoutinNaviActivity;
 
 public class MainActivity extends AppCompatActivity
@@ -216,6 +217,9 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camara) {
             // Handle the camera action
+            Intent intent=new Intent(MainActivity.this, DetailActivity.class);
+            startActivity(intent);
+            item.setChecked(false);
         } else if (id == R.id.nav_gallery) {
             Intent intent=new Intent(MainActivity.this, RoutinNaviActivity.class);
             startActivity(intent);
