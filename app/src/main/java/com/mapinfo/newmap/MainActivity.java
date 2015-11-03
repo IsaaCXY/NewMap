@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity
         initView();
         map = mapView.getMap();
         setSupportActionBar(toolbar);
-        initOrientationListener();
+
         locationListener = new MyLocationListener(mapView, this);
         //地图初始化
         map.setMyLocationEnabled(true);
@@ -72,7 +72,6 @@ public class MainActivity extends AppCompatActivity
         locationClient.setLocOption(option);
         locationClient.start();
         map.setMapStatus(MapStatusUpdateFactory.zoomTo(16));//设置初始缩放等级
-
         initOrientationListener();
 
         fab.setOnClickListener(new View.OnClickListener() {

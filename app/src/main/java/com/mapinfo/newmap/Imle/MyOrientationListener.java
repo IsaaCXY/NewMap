@@ -46,8 +46,6 @@ public class MyOrientationListener implements SensorEventListener {
             }
             lastX = x;
         }
-
-
     }
 
     public void setOrientationListener(onOrientationListener listener) {

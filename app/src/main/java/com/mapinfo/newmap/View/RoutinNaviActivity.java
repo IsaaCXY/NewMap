@@ -103,8 +103,8 @@ public class RoutinNaviActivity extends AppCompatActivity implements BaiduMap.On
         map.clear();
         nodeIndex = -1;
         //起点和终点，对于Transit来说，城市名没有意义
-        PlanNode stNode = PlanNode.withCityNameAndPlaceName("北京", start.getText().toString());
-        PlanNode enNode = PlanNode.withCityNameAndPlaceName("北京", end.getText().toString());
+        PlanNode stNode = PlanNode.withCityNameAndPlaceName("长沙", start.getText().toString());
+        PlanNode enNode = PlanNode.withCityNameAndPlaceName("长沙", end.getText().toString());
 
         rps.walkingSearch(new WalkingRoutePlanOption()
                 .from(stNode).to(enNode));
@@ -145,7 +145,7 @@ public class RoutinNaviActivity extends AppCompatActivity implements BaiduMap.On
         if (nodeLocation == null || nodeTitle == null) return;
         //移动节点至屏幕中心并显示popwindow;
         MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(nodeLocation);
-        map.setMapStatus(msu);
+        map.animateMapStatus(msu);
         popText = new TextView(RoutinNaviActivity.this);
         popText.setBackgroundResource(R.drawable.popup);
         popText.setTextColor(0xFF000000);
