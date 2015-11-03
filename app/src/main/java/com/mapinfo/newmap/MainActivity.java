@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity
     MyOrientationListener orientationListener;
     float direction;
     BitmapDescriptor bd, info;
+    DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,10 +83,11 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+      
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+                this, drawerLayout, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -127,7 +129,7 @@ public class MainActivity extends AppCompatActivity
 
                     }
                 });
-                InfoWindow info=new InfoWindow(button,marker.getPosition(),-100);
+                InfoWindow info = new InfoWindow(button, marker.getPosition(), -100);
                 map.showInfoWindow(info);
                 return true;
             }
@@ -143,12 +145,13 @@ public class MainActivity extends AppCompatActivity
     private void initOrientationListener() {
         orientationListener = new MyOrientationListener(this);
 
-        orientationListener.setOrientationListener(new MyOrientationListener.onOrientationListener() {
+        orientationListener.setOrientationListener(
+                new MyOrientationListener.onOrientationListener() {
             @Override
             public void onOrientationChanged(float x) {
                 direction = x;
 
-                if (mapView == null) return;
+                if (locationListener.getLatLng()==null||mapView == null) return;
                 MyLocationData data = new MyLocationData.Builder()
                         .accuracy(locationListener.getRadius())
                         .direction(direction)
@@ -166,13 +169,14 @@ public class MainActivity extends AppCompatActivity
         fab = (FloatingActionButton) findViewById(R.id.fab);
         bd = BitmapDescriptorFactory.fromResource(R.drawable.icon_gcoding);
         info = BitmapDescriptorFactory.fromResource(R.drawable.popup);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+      drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
@@ -217,11 +221,11 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camara) {
             // Handle the camera action
-            Intent intent=new Intent(MainActivity.this, DetailActivity.class);
+            Intent intent = new Intent(MainActivity.this, DetailActivity.class);
             startActivity(intent);
             item.setChecked(false);
         } else if (id == R.id.nav_gallery) {
-            Intent intent=new Intent(MainActivity.this, RoutinNaviActivity.class);
+            Intent intent = new Intent(MainActivity.this, RoutinNaviActivity.class);
             startActivity(intent);
             item.setChecked(false);
         } else if (id == R.id.nav_share) {
