@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         locationListener = new MyLocationListener(mapView, this);
+
         //地图初始化
         map.setMyLocationEnabled(true);
         locationClient = new LocationClient(this);
@@ -120,7 +121,7 @@ public class MainActivity extends AppCompatActivity
                 Button button = new Button(getApplicationContext());
 
                 button.setBackgroundResource(R.drawable.popup);
-                button.setText("deleteThis");
+                button.setText("活动点");
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -136,15 +137,20 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-    //定位并移动
+    /**
+     * 定位并移动地图
+     */
     private void centerToCurrentPlace() {
         MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(locationListener.getLatLng());
         map.animateMapStatus(msu);
     }
 
+    /**
+     * 初始化方向传感器
+     */
     private void initOrientationListener() {
         orientationListener = new MyOrientationListener(this);
-
+        orientationListener.start();
         orientationListener.setOrientationListener(
                 new MyOrientationListener.onOrientationListener() {
             @Override
@@ -249,6 +255,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+
+    @Override
     protected void onResume() {
 
         mapView.onResume();
@@ -258,7 +270,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onStart() {
         super.onStart();
-        orientationListener.start();
+//        orientationListener.start();
     }
 
     @Override
